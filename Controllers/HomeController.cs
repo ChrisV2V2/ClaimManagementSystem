@@ -60,19 +60,34 @@ namespace LecturerHourlyClaimApp.Controllers
 
         public IActionResult SubmitClaim()
         {
-            return View();
+            var model = new SubmitClaimViewModel
+            {
+                HourlyRate = 50m // Hardcoded hourly rate
+            };
+            return View(model);
         }
 
         // Handle the Submit Claim form submission
         [HttpPost]
         public IActionResult SubmitClaim(SubmitClaimViewModel model)
         {
+            model.HourlyRate = 50m; // Hardcoded hourly rate
+
             if (ModelState.IsValid)
             {
-                // You can add claim processing logic here (e.g., saving the claim to a database)
+                // Ensure end date is after start date
+                if (model.StartDate > model.EndDate)
+                {
+                    ModelState.AddModelError("", "End date must be after the start date.");
+                    return View(model); // Return the model with validation errors
+                }
+
+                // Successful submission
                 ViewBag.Message = "Your claim has been successfully submitted!";
+                ViewBag.TotalClaim = model.TotalClaim.ToString("C"); // Format for currency
             }
 
+            // Return the model back to the view even if there are validation errors
             return View(model);
         }
     }
