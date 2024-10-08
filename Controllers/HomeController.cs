@@ -57,5 +57,23 @@ namespace LecturerHourlyClaimApp.Controllers
             {
                 return View();
             }
+
+        public IActionResult SubmitClaim()
+        {
+            return View();
         }
+
+        // Handle the Submit Claim form submission
+        [HttpPost]
+        public IActionResult SubmitClaim(SubmitClaimViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // You can add claim processing logic here (e.g., saving the claim to a database)
+                ViewBag.Message = "Your claim has been successfully submitted!";
+            }
+
+            return View(model);
+        }
+    }
 }

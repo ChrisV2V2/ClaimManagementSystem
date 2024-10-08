@@ -1,10 +1,3 @@
-C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.AssemblyInfoInputs.cache
-C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.AssemblyInfo.cs
-C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.csproj.CoreCompileInputs.cache
-C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.RazorAssemblyInfo.cache
-C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.RazorAssemblyInfo.cs
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\bin\Debug\net8.0\appsettings.json
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\bin\Debug\net8.0\LecturerHourlyClaimApp.staticwebassets.runtime.json
@@ -13,6 +6,14 @@ C:\Users\chris\source\repos\LecturerHourlyClaimApp\bin\Debug\net8.0\LecturerHour
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\bin\Debug\net8.0\LecturerHourlyClaimApp.runtimeconfig.json
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\bin\Debug\net8.0\LecturerHourlyClaimApp.dll
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\bin\Debug\net8.0\LecturerHourlyClaimApp.pdb
+C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.AssemblyInfoInputs.cache
+C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.AssemblyInfo.cs
+C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.csproj.CoreCompileInputs.cache
+C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.RazorAssemblyInfo.cache
+C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.RazorAssemblyInfo.cs
+C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.sourcelink.json
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\staticwebassets\msbuild.LecturerHourlyClaimApp.Microsoft.AspNetCore.StaticWebAssets.props
