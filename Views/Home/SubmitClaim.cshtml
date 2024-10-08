@@ -28,7 +28,7 @@
 
     <div class="form-group">
         <label asp-for="Notes">Notes</label>
-        <textarea asp-for="Notes" class="form-control"></textarea>
+        <textarea asp-for="Notes" class="form-control" data-val="false"></textarea>
         <span asp-validation-for="Notes" class="text-danger"></span>
     </div>
 
@@ -49,3 +49,13 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<script>
+    $(document).ready(function () {
+        // More specific targeting of the Notes field
+        $('#Notes').removeAttr('data-val');
+        $('#Notes').removeAttr('data-val-required');
+        $('#Notes').removeAttr('aria-required');
+    });
+</script>
+

@@ -75,19 +75,17 @@ namespace LecturerHourlyClaimApp.Controllers
 
             if (ModelState.IsValid)
             {
-                // Ensure end date is after start date
                 if (model.StartDate > model.EndDate)
                 {
                     ModelState.AddModelError("", "End date must be after the start date.");
-                    return View(model); // Return the model with validation errors
+                    return View(model);
                 }
 
-                // Successful submission
                 ViewBag.Message = "Your claim has been successfully submitted!";
-                ViewBag.TotalClaim = model.TotalClaim.ToString("C"); // Format for currency
+                ViewBag.TotalClaim = model.TotalClaim.ToString("C");
+                return View(model);
             }
 
-            // Return the model back to the view even if there are validation errors
             return View(model);
         }
     }
