@@ -1,0 +1,51 @@
+﻿using LecturerHourlyClaimApp.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace LecturerHourlyClaimApp.Data
+{
+    public class LecturerDbContext : DbContext
+    {
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Claim> Claims { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        public LecturerDbContext(DbContextOptions<LecturerDbContext> options)
+            : base(options)
+        {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Define primary keys
+            modelBuilder.Entity<Person>().HasKey(p => p.Id);
+            modelBuilder.Entity<Claim>().HasKey(c => c.Id);
+            modelBuilder.Entity<User>().HasKey(u => u.Id);
+
+            // Configure relationships
+            modelBuilder.Entity<Claim>()
+                .HasOne(c => c.Person)
+                .WithMany(p => p.Claims)
+                .HasForeignKey(c => c.PersonId);
+
+            // Seed data for Users
+            modelBuilder.Entity<User>().HasData(
+                new User { Id = 1, Username = "lecturer1", Password = "password1", Role = "Lecturer" },
+                new User { Id = 2, Username = "admin1", Password = "password2", Role = "Admin" }
+            );
+
+            // Seed data for Persons
+            modelBuilder.Entity<Person>().HasData(
+                new Person { Id = 1, FirstName = "John", LastName = "Doe" },
+                new Person { Id = 2, FirstName = "Jane", LastName = "Smith" }
+            );
+
+            // Seed data for Claims (if needed)
+            modelBuilder.Entity<Claim>().HasData(
+                new Claim { Id = 1, StartDate = DateTime.Now.AddDays(-7), EndDate = DateTime.Now.AddDays(-1), HoursWorked = 10, HourlyRate = 50, PersonId = 1, Notes = "Sample claim for John Doe" },
+                new Claim { Id = 2, StartDate = DateTime.Now.AddDays(-5), EndDate = DateTime.Now.AddDays(-2), HoursWorked = 8, HourlyRate = 50, PersonId = 2, Notes = "Sample claim for Jane Smith" }
+            );
+        }
+    }
+}

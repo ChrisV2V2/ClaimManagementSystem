@@ -1,6 +1,8 @@
 using LecturerHourlyClaimApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace LecturerHourlyClaimApp.Controllers
 {
@@ -13,8 +15,20 @@ namespace LecturerHourlyClaimApp.Controllers
             { "admin", ("adminpass", "Admin") }
         };
 
-            // Display the login page
-            public IActionResult Index()
+        private static List<LecturerHourlyClaimApp.Models.Claim> claims = new List<LecturerHourlyClaimApp.Models.Claim>//Not sure why this is refrencing a sys class??
+        {
+            new LecturerHourlyClaimApp.Models.Claim { Id = 1, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(1), HoursWorked = 8, HourlyRate = 50, Notes = "Worked on project", PersonId = 1 },
+            new LecturerHourlyClaimApp.Models.Claim { Id = 2, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(2), HoursWorked = 6, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1 }
+        };
+
+        private static List<Person> persons = new List<Person>
+        {
+            new Person { Id = 1, FirstName = "John", LastName = "Doe", HourlyRate = 50 },
+            new Person { Id = 2, FirstName = "Jane", LastName = "Smith", HourlyRate = 60 }
+        };
+
+        // Display the login page
+        public IActionResult Index()
             {
                 return View();
             }
@@ -58,6 +72,38 @@ namespace LecturerHourlyClaimApp.Controllers
                 return View();
             }
 
+        
+        public IActionResult PendingClaims()
+        {
+            var pendingClaims = claims; // Retrieve claims for display
+            return View(pendingClaims);
+        }
+
+
+        // Verify a claim by ID (admin functionality)
+        public IActionResult VerifyClaim(int id)
+        {
+            var claim = claims.FirstOrDefault(c => c.Id == id);
+            if (claim != null)
+            {
+                TempData["Message"] = $"Claim #{id} has been verified.";
+                // Mark the claim as verified if needed (e.g., add a Verified property)
+            }
+            return RedirectToAction("PendingClaims");
+        }
+
+        // Reject a claim by ID (admin functionality)
+        public IActionResult RejectClaim(int id)
+        {
+            var claim = claims.FirstOrDefault(c => c.Id == id);
+            if (claim != null)
+            {
+                claims.Remove(claim); // Simulating rejection by removing the claim
+                TempData["Message"] = $"Claim #{id} has been rejected.";
+            }
+            return RedirectToAction("PendingClaims");
+        }
+
         public IActionResult SubmitClaim()
         {
             var model = new SubmitClaimViewModel
@@ -81,8 +127,23 @@ namespace LecturerHourlyClaimApp.Controllers
                     return View(model);
                 }
 
+                // Create a new claim from the submitted data
+                var newClaim = new LecturerHourlyClaimApp.Models.Claim
+                {
+                    Id = claims.Count + 1, // Simple ID assignment
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    HoursWorked = model.HoursWorked,
+                    HourlyRate = model.HourlyRate,
+                    Notes = model.Notes,
+                    PersonId = 1 // Set to a valid PersonId as needed
+                };
+
+                // Add the claim to the list
+                claims.Add(newClaim);
+
                 ViewBag.Message = "Your claim has been successfully submitted!";
-                ViewBag.TotalClaim = model.TotalClaim.ToString("C");
+                ViewBag.TotalClaim = newClaim.TotalClaim.ToString("C");
                 return View(model);
             }
 
