@@ -1,22 +1,55 @@
 ﻿@model LecturerHourlyClaimApp.Models.LoginViewModel
 
-<h2>Login</h2>
+<style>
+    body {
+        background-color: #007bff; /* Blue background */
+    }
 
-<form asp-action="Login" method="post">
-    <div class="form-group">
-        <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+    }
 
-@if (ViewData.ModelState.Count > 0)
-{
-    <div class="text-danger">
-        Invalid username or password
+    .login-box {
+        background-color: white; /* White background for the login box */
+        padding: 2rem; /* Padding inside the box */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        width: 300px; /* Fixed width for the login box */
+    }
+
+    .form-group {
+        margin-bottom: 1rem; /* Space between form elements */
+    }
+
+    .btn {
+        margin-top: 1rem; /* Space above the button */
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-box">
+        <h2>Login</h2>
+
+        <form asp-action="Login" method="post">
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+        @if (ViewData.ModelState.Count > 0)
+        {
+            <div class="text-danger">
+                Invalid username or password
+            </div>
+        }
     </div>
-}
+</div>

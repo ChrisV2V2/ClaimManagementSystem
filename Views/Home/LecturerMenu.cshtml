@@ -1,14 +1,46 @@
-﻿<h2>Lecturer Main Menu</h2>
-<p>Welcome, Lecturer! You can now submit your claims.</p>
-<form method="get" asp-controller="Home" asp-action="SubmitClaim">
-    <button type="submit" class="btn btn-primary">Submit a Claim</button>
-</form>
+﻿
+<style>
+    body {
+        background-color: #007bff; /* Blue background */
+    }
 
-<form method="get" asp-controller="Home" asp-action="TrackClaims">
-    <button type="submit" class="btn btn-primary">Track your Claims</button>
-</form>
+    .menu-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+    }
 
-<form method="post" asp-controller="Home" asp-action="Logout">
-    <button type="submit" class="btn btn-danger">Logout</button>
-</form>
+    .menu-box {
+        background-color: white; /* White background for the menu box */
+        padding: 2rem; /* Padding inside the box */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        width: 300px; /* Fixed width for the menu box */
+        text-align: center; /* Center text alignment */
+    }
 
+    .btn {
+        margin-top: 1rem; /* Space above the button */
+        width: 100%; /* Full width for buttons */
+    }
+</style>
+
+<div class="menu-container">
+    <div class="menu-box">
+        <h2>Lecturer Main Menu</h2>
+        <p>Welcome, Lecturer! You can now submit your claims.</p>
+
+        <form method="get" asp-controller="Home" asp-action="SubmitClaim">
+            <button type="submit" class="btn btn-primary">Submit a Claim</button>
+        </form>
+
+        <form method="get" asp-controller="Home" asp-action="TrackClaims">
+            <button type="submit" class="btn btn-primary">Track your Claims</button>
+        </form>
+
+        <form method="post" asp-controller="Home" asp-action="Logout">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+</div>
