@@ -9,16 +9,16 @@ using Claim = LecturerHourlyClaimApp.Models.Claim;
 
 namespace LecturerHourlyClaimApp.Controllers
 {
-        public class HomeController : Controller
-        {
-            // Hardcoded user credentials
-            private readonly Dictionary<string, (string password, string role)> _users = new Dictionary<string, (string password, string role)>
+    public class HomeController : Controller
+    {
+        // Hardcoded user credentials
+        private readonly Dictionary<string, (string password, string role)> _users = new Dictionary<string, (string password, string role)>
         {
             { "lecturer", ("password123", "Lecturer") },
             { "admin", ("adminpass", "Admin") }
         };
 
-        private static List<LecturerHourlyClaimApp.Models.Claim> claims = new List<LecturerHourlyClaimApp.Models.Claim>//Not sure why this is refrencing a sys class??
+        private static List<LecturerHourlyClaimApp.Models.Claim> claims = new List<LecturerHourlyClaimApp.Models.Claim>
         {
             new LecturerHourlyClaimApp.Models.Claim { Id = 1, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(1), HoursWorked = 8, HourlyRate = 50, Notes = "Worked on project", PersonId = 1, Status = "Pending" },
             new LecturerHourlyClaimApp.Models.Claim { Id = 2, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(2), HoursWorked = 6, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Pending"}
@@ -32,19 +32,19 @@ namespace LecturerHourlyClaimApp.Controllers
 
         // Display the login page
         public IActionResult Index()
-            {
-                return View();
-            }
+        {
+            return View();
+        }
 
-            // Handle login submission
-            [HttpPost]
-            public IActionResult Login(LoginViewModel model)
+        // Handle login submission
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
                 LecturerDbContext db = new LecturerDbContext();
                 db.Database.EnsureCreated();
-                var userInfo = db.Users.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password);  
+                var userInfo = db.Users.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password);
                 if (userInfo != null)
                 {
                     // Redirect based on the role
@@ -58,58 +58,54 @@ namespace LecturerHourlyClaimApp.Controllers
                     }
                 }
 
-                   
-
-                    // Invalid credentials
-                    ModelState.AddModelError("", "Invalid username or password.");
-                }
-
-                // Return the login view with the error message
-                return View("Index", model);
+                // Invalid credentials
+                ModelState.AddModelError("", "Invalid username or password.");
             }
 
-            // Lecturer Main Menu
-            public IActionResult LecturerMenu()
-            {
-                return View();
-            }
+            // Return the login view with the error message
+            return View("Index", model);
+        }
 
-            // Admin Main Menu
-            public IActionResult AdminMenu()
-            {
-                return View();
-            }
+        // Lecturer Main Menu
+        public IActionResult LecturerMenu()
+        {
+            return View();
+        }
 
-        
+        // Admin Main Menu
+        public IActionResult AdminMenu()
+        {
+            return View();
+        }
+
         public IActionResult PendingClaims()
         {
             var pendingClaims = claims; // Retrieve claims for display
             return View(pendingClaims);
         }
 
-
         // Verify a claim by ID (admin functionality)
-        public IActionResult VerifyClaim(int id)
+        public IActionResult VerifyClaim(int id, string adminComment)
         {
             var claim = claims.FirstOrDefault(c => c.Id == id);
             if (claim != null)
             {
                 claim.Status = "Approved";
+                claim.AdminComment = adminComment; // Set the admin comment
                 TempData["Message"] = $"Claim #{id} has been verified.";
-                // Mark the claim as verified if needed (e.g., add a Verified property)
             }
             return RedirectToAction("PendingClaims");
         }
 
         // Reject a claim by ID (admin functionality)
-        public IActionResult RejectClaim(int id)
+        public IActionResult RejectClaim(int id, string adminComment)
         {
             var claim = claims.FirstOrDefault(c => c.Id == id);
             if (claim != null)
             {
                 claim.Status = "Rejected";
+                claim.AdminComment = adminComment; // Set the admin comment
                 TempData["Message"] = $"Claim #{id} has been rejected.";
-                
             }
             return RedirectToAction("PendingClaims");
         }
@@ -123,13 +119,10 @@ namespace LecturerHourlyClaimApp.Controllers
             return View(model);
         }
 
-
-
         private string GetClaimStatus(Claim claim)
         {
             return claim.Status;
         }
-
 
         public IActionResult TrackClaims()
         {
@@ -165,38 +158,6 @@ namespace LecturerHourlyClaimApp.Controllers
         {
             return RedirectToAction("Index"); // Redirects to the login page
         }
-
-        // Update admin comment and handle approval
-        [HttpPost]
-        public IActionResult UpdateAdminComment(Claim model)
-        {
-            var claim = claims.FirstOrDefault(c => c.Id == model.Id);
-            if (claim != null)
-            {
-                if (Request.Form.ContainsKey("Approve"))
-                {
-                    claim.Status = "Approved";
-                    claim.AdminComment = model.AdminComment; // This line should set the comment
-                    TempData["Message"] = $"Claim #{model.Id} has been approved.";
-                }
-                else if (Request.Form.ContainsKey("Reject"))
-                {
-                    if (string.IsNullOrWhiteSpace(model.AdminComment))
-                    {
-                        ModelState.AddModelError("", "Admin comment is required for rejecting a claim.");
-                        return View("PendingClaims", claims); // Return to the pending claims view with the model
-                    }
-
-                    claim.Status = "Rejected";
-                    claim.AdminComment = model.AdminComment; // This line should also set the comment
-                    TempData["Message"] = $"Claim #{model.Id} has been rejected.";
-                }
-            }
-            return RedirectToAction("PendingClaims");
-        }
-
-
-
 
         // Handle the Submit Claim form submission
         [HttpPost]
@@ -261,9 +222,7 @@ namespace LecturerHourlyClaimApp.Controllers
                     Status = "Pending"
                 };
 
-
-
-               // Add the claim to the list
+                // Add the claim to the list
                 claims.Add(newClaim);
 
                 ViewBag.Message = "Your claim has been successfully submitted!";
