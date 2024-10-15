@@ -15,6 +15,7 @@ namespace LecturerHourlyClaimApp.Models
         public string Notes { get; set; }
         public string? SupportingDocumentPath { get; set; }
 
+        public string Status { get; set; }
 
         // Foreign key to link claim with a person
         public int PersonId { get; set; }

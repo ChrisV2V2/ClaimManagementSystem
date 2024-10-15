@@ -7,6 +7,30 @@
       "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\data\\lecturerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:data\\lecturerdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\models\\claim.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:models\\claim.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\home\\adminmenu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:views\\home\\adminmenu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\home\\lecturermenu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:views\\home\\lecturermenu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\models\\trackclaimviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:models\\trackclaimviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\home\\trackclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:views\\home\\trackclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\home\\pendingclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:views\\home\\pendingclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -27,24 +51,12 @@
       "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\home\\lecturermenu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:views\\home\\lecturermenu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\models\\claim.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:models\\claim.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\home\\adminmenu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:views\\home\\adminmenu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -58,7 +70,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 18,
           "Children": [
             {
               "$type": "Bookmark",
@@ -79,6 +91,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "LecturerDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Data\\LecturerDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\LecturerDbContext.cs",
+              "ToolTip": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Data\\LecturerDbContext.cs",
+              "RelativeToolTip": "Data\\LecturerDbContext.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAowC0AAADWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T16:31:29.852Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TrackClaims.cshtml",
+              "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\Home\\TrackClaims.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\TrackClaims.cshtml",
+              "ToolTip": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\Home\\TrackClaims.cshtml",
+              "RelativeToolTip": "Views\\Home\\TrackClaims.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAADMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-15T16:26:04.773Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TrackClaimViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Models\\TrackClaimViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\TrackClaimViewModel.cs",
+              "ToolTip": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Models\\TrackClaimViewModel.cs",
+              "RelativeToolTip": "Models\\TrackClaimViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T16:24:08.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "PendingClaims.cshtml",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\Home\\PendingClaims.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\PendingClaims.cshtml",
@@ -86,25 +137,24 @@
               "RelativeToolTip": "Views\\Home\\PendingClaims.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAADAAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-15T14:50:31.607Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-15T14:50:31.607Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 2,
               "Title": "Claim.cs",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Models\\Claim.cs",
               "RelativeDocumentMoniker": "Models\\Claim.cs",
               "ToolTip": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Models\\Claim.cs",
               "RelativeToolTip": "Models\\Claim.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAA6wBoAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-15T14:32:02.247Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -112,12 +162,11 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-15T12:33:19.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-15T12:33:19.118Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -125,12 +174,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-12T06:48:09.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-12T06:48:09.773Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
@@ -142,7 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "SubmitClaim.cshtml",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\Home\\SubmitClaim.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\SubmitClaim.cshtml",
@@ -150,12 +198,11 @@
               "RelativeToolTip": "Views\\Home\\SubmitClaim.cshtml",
               "ViewState": "AQIAACoAAAAAAAAAAAAAAAYAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-08T17:23:07.359Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T17:23:07.359Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "SubmitClaimViewModel.cs",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Models\\SubmitClaimViewModel.cs",
               "RelativeDocumentMoniker": "Models\\SubmitClaimViewModel.cs",
@@ -163,12 +210,11 @@
               "RelativeToolTip": "Models\\SubmitClaimViewModel.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAAwBYAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T17:22:01.691Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T17:22:01.691Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "LoginViewModel.cs",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Models\\LoginViewModel.cs",
               "RelativeDocumentMoniker": "Models\\LoginViewModel.cs",
@@ -176,12 +222,11 @@
               "RelativeToolTip": "Models\\LoginViewModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-08T17:05:14.59Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T17:05:14.59Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 3,
               "Title": "AdminMenu.cshtml",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\Home\\AdminMenu.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\AdminMenu.cshtml",
@@ -194,20 +239,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "LecturerMenu.cshtml",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\Home\\LecturerMenu.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\LecturerMenu.cshtml",
               "ToolTip": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\Home\\LecturerMenu.cshtml",
               "RelativeToolTip": "Views\\Home\\LecturerMenu.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAoAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-08T17:03:43.057Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
@@ -215,8 +260,7 @@
               "RelativeToolTip": "Views\\Home\\Index.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-08T17:02:17.145Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-08T17:02:17.145Z"
             },
             {
               "$type": "Document",
@@ -226,7 +270,7 @@
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AQIAAKgAAAAAAAAAAAAowKgAAAAVAAAA",
+              "ViewState": "AQIAAH8AAAAAAAAAAAAkwJ0AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-08T17:01:22.12Z",
               "EditorCaption": ""

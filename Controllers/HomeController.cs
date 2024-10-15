@@ -1,5 +1,6 @@
 using LecturerHourlyClaimApp.Data;
 using LecturerHourlyClaimApp.Models;
+using LecturerHourlyClaimApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -19,8 +20,8 @@ namespace LecturerHourlyClaimApp.Controllers
 
         private static List<LecturerHourlyClaimApp.Models.Claim> claims = new List<LecturerHourlyClaimApp.Models.Claim>//Not sure why this is refrencing a sys class??
         {
-            new LecturerHourlyClaimApp.Models.Claim { Id = 1, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(1), HoursWorked = 8, HourlyRate = 50, Notes = "Worked on project", PersonId = 1 },
-            new LecturerHourlyClaimApp.Models.Claim { Id = 2, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(2), HoursWorked = 6, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1 }
+            new LecturerHourlyClaimApp.Models.Claim { Id = 1, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(1), HoursWorked = 8, HourlyRate = 50, Notes = "Worked on project", PersonId = 1, Status = "Pending" },
+            new LecturerHourlyClaimApp.Models.Claim { Id = 2, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(2), HoursWorked = 6, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Pending"}
         };
 
         private static List<Person> persons = new List<Person>
@@ -93,6 +94,7 @@ namespace LecturerHourlyClaimApp.Controllers
             var claim = claims.FirstOrDefault(c => c.Id == id);
             if (claim != null)
             {
+                claim.Status = "Approved";
                 TempData["Message"] = $"Claim #{id} has been verified.";
                 // Mark the claim as verified if needed (e.g., add a Verified property)
             }
@@ -105,7 +107,7 @@ namespace LecturerHourlyClaimApp.Controllers
             var claim = claims.FirstOrDefault(c => c.Id == id);
             if (claim != null)
             {
-                claims.Remove(claim); // Simulating rejection by removing the claim
+                claim.Status = "Rejected";
                 TempData["Message"] = $"Claim #{id} has been rejected.";
             }
             return RedirectToAction("PendingClaims");
@@ -118,6 +120,41 @@ namespace LecturerHourlyClaimApp.Controllers
                 HourlyRate = 50m // Hardcoded hourly rate
             };
             return View(model);
+        }
+
+        private string GetClaimStatus(Claim claim)
+        {
+            return claim.Status;
+        }
+
+
+        public IActionResult TrackClaims()
+        {
+            // Retrieve the user ID of the logged-in user
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            int userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
+
+            // Log the user ID
+            Console.WriteLine($"User ID: {userId}"); // Log the user ID
+
+            // Get claims submitted by the lecturer using the user ID or by ID 1
+            var lecturerClaims = claims.Where(c => c.PersonId == userId || c.PersonId == 1)
+                .Select(c => new TrackClaimViewModel
+                {
+                    Id = c.Id,
+                    StartDate = c.StartDate,
+                    EndDate = c.EndDate,
+                    HoursWorked = c.HoursWorked,
+                    HourlyRate = c.HourlyRate,
+                    Notes = c.Notes,
+                    Status = GetClaimStatus(c), // Use the helper method to determine status
+                    SupportingDocumentPath = c.SupportingDocumentPath
+                }).ToList();
+
+            // Log number of claims found
+            Console.WriteLine($"Lecturer Claims Found: {lecturerClaims.Count}");
+
+            return View(lecturerClaims);
         }
 
         public IActionResult Logout()

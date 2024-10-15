@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LecturerHourlyClaimApp.ViewModels.TrackClaimViewModel>
+
+@{
+    ViewData["Title"] = "Track Your Claims";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Hours Worked</th>
+            <th>Hourly Rate</th>
+            <th>Notes</th>
+            <th>Status</th>
+            <th>Supporting Document</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.Id</td>
+                    <td>@claim.StartDate.ToShortDateString()</td>
+                    <td>@claim.EndDate.ToShortDateString()</td>
+                    <td>@claim.HoursWorked</td>
+                    <td>@claim.HourlyRate.ToString("C")</td>
+                    <td>@claim.Notes</td>
+                    <td>@claim.Status</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
+                        {
+                            <a href="@Url.Content("~/" + claim.SupportingDocumentPath)" target="_blank">View Document</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="8" class="text-center">No claims submitted yet.</td>
+            </tr>
+        }
+    </tbody>
+</table>

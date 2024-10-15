@@ -42,8 +42,8 @@ namespace LecturerHourlyClaimApp.Data
 
             // Seed data for Claims (if needed)
             modelBuilder.Entity<Claim>().HasData(
-                new Claim { Id = 1, StartDate = DateTime.Now.AddDays(-7), EndDate = DateTime.Now.AddDays(-1), HoursWorked = 10, HourlyRate = 50, PersonId = 1, Notes = "Sample claim for John Doe" },
-                new Claim { Id = 2, StartDate = DateTime.Now.AddDays(-5), EndDate = DateTime.Now.AddDays(-2), HoursWorked = 8, HourlyRate = 50, PersonId = 2, Notes = "Sample claim for Jane Smith" }
+                new Claim { Id = 1, StartDate = DateTime.Now.AddDays(-7), EndDate = DateTime.Now.AddDays(-1), HoursWorked = 10, HourlyRate = 50, PersonId = 1, Notes = "Sample claim for John Doe", Status = "Pending" },
+                new Claim { Id = 2, StartDate = DateTime.Now.AddDays(-5), EndDate = DateTime.Now.AddDays(-2), HoursWorked = 8, HourlyRate = 50, PersonId = 2, Notes = "Sample claim for Jane Smith", Status = "Pending" }
             );
             base.OnModelCreating(modelBuilder);
         }
