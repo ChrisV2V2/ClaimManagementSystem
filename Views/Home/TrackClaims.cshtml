@@ -1,53 +1,106 @@
 ﻿@model IEnumerable<LecturerHourlyClaimApp.ViewModels.TrackClaimViewModel>
 
+<style>
+    body {
+        background-color: #f8f9fa; /* Light background for better contrast */
+        font-family: 'Arial', sans-serif; /* Modern font */
+        color: #333; /* Dark text color for readability */
+    }
+
+    h2 {
+        text-align: center; /* Center align the heading */
+        margin-bottom: 1.5rem; /* Space below the heading */
+        font-size: 2rem; /* Increase font size for heading */
+    }
+
+    .table {
+        width: 100%; /* Full width of the container */
+        margin-bottom: 1rem; /* Space below the table */
+        background-color: white; /* White background for the table */
+        border-collapse: collapse; /* Collapse borders for a cleaner look */
+        border-radius: 5px; /* Rounded corners for table */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+        overflow: hidden; /* Ensure rounded corners work */
+    }
+
+        .table th, .table td {
+            padding: 0.75rem; /* Padding inside table cells */
+            text-align: left; /* Left align text */
+            border-bottom: 1px solid #dee2e6; /* Bottom border for cells */
+            word-wrap: break-word; /* Allow long text to wrap */
+        }
+
+        .table th {
+            background-color: #007bff; /* Primary color for table header */
+            color: white; /* White text for header */
+            font-weight: bold; /* Bold font for header */
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1; /* Highlight row on hover */
+        }
+
+    .text-danger {
+        color: #dc3545; /* Danger text color for errors or important messages */
+    }
+
+    .no-claims {
+        text-align: center; /* Center align the no claims message */
+        margin-top: 1rem; /* Space above the message */
+        font-size: 1.2rem; /* Increase font size for better visibility */
+    }
+</style>
+
 <h2>Your Claims</h2>
 
 @if (Model.Any())
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Claim ID</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Hours Worked</th>
-                <th>Hourly Rate</th>
-                <th>Total Claim</th>
-                <th>Notes</th>
-                <th>Supporting Document</th>
-                <th>Status</th>
-                <th>Admin Comment</th> <!-- New column for Admin Comments -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var claim in Model)
-            {
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@claim.Id</td>
-                    <td>@claim.StartDate.ToShortDateString()</td>
-                    <td>@claim.EndDate.ToShortDateString()</td>
-                    <td>@claim.HoursWorked</td>
-                    <td>@claim.HourlyRate.ToString("C")</td>
-                    <td>@claim.TotalClaim.ToString("C")</td>
-                    <td>@claim.Notes</td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
-                        {
-                            <a href="@claim.SupportingDocumentPath" target="_blank">View Document</a>
-                        }
-                        else
-                        {
-                            <span>No Document</span>
-                        }
-                    </td>
-                    <td>@claim.Status</td> <!-- Show claim status -->
-                    <td>@(!string.IsNullOrEmpty(claim.AdminComment) ? claim.AdminComment : "No comments")</td>
+                    <th>Claim ID</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Hours Worked</th>
+                    <th>Hourly Rate</th>
+                    <th>Total Claim</th>
+                    <th>Notes</th>
+                    <th>Supporting Document</th>
+                    <th>Status</th>
+                    <th>Admin Comment</th> <!-- New column for Admin Comments -->
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var claim in Model)
+                {
+                    <tr>
+                        <td>@claim.Id</td>
+                        <td>@claim.StartDate.ToShortDateString()</td>
+                        <td>@claim.EndDate.ToShortDateString()</td>
+                        <td>@claim.HoursWorked</td>
+                        <td>@claim.HourlyRate.ToString("C")</td>
+                        <td>@claim.TotalClaim.ToString("C")</td>
+                        <td>@claim.Notes</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
+                            {
+                                <a href="@claim.SupportingDocumentPath" target="_blank">View Document</a>
+                            }
+                            else
+                            {
+                                <span>No Document</span>
+                            }
+                        </td>
+                        <td>@claim.Status</td> <!-- Show claim status -->
+                        <td>@(!string.IsNullOrEmpty(claim.AdminComment) ? claim.AdminComment : "No comments")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {
-    <p>No claims found.</p>
+    <p class="no-claims">No claims found.</p>
 }

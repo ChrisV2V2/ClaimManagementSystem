@@ -3,6 +3,8 @@
 <style>
     body {
         background-color: #007bff; /* Blue background */
+        font-family: 'Arial', sans-serif; /* Modern font */
+        color: #333; /* Dark text color for contrast */
     }
 
     .login-container {
@@ -14,18 +16,67 @@
 
     .login-box {
         background-color: white; /* White background for the login box */
-        padding: 2rem; /* Padding inside the box */
-        border-radius: 8px; /* Rounded corners */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        padding: 2.5rem; /* Increased padding */
+        border-radius: 10px; /* Slightly rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow */
         width: 300px; /* Fixed width for the login box */
+        text-align: center; /* Center text alignment */
+        transition: transform 0.3s; /* Smooth scaling effect */
+    }
+
+        .login-box:hover {
+            transform: translateY(-5px); /* Slight upward movement on hover */
+        }
+
+    h2 {
+        font-size: 1.8rem; /* Larger font size for heading */
+        margin-bottom: 1rem; /* Space below heading */
     }
 
     .form-group {
-        margin-bottom: 1rem; /* Space between form elements */
+        margin-bottom: 1.5rem; /* Increased space between form elements */
     }
+
+    label {
+        display: block; /* Block display for labels */
+        margin-bottom: 0.5rem; /* Space below labels */
+    }
+
+    input {
+        width: 100%; /* Full width for inputs */
+        padding: 0.5rem; /* Padding for input fields */
+        border: 1px solid #ccc; /* Border for input fields */
+        border-radius: 5px; /* Rounded corners for inputs */
+        transition: border-color 0.3s; /* Smooth border color change */
+    }
+
+        input:focus {
+            border-color: #007bff; /* Change border color on focus */
+            outline: none; /* Remove outline */
+        }
 
     .btn {
         margin-top: 1rem; /* Space above the button */
+        width: 100%; /* Full width for buttons */
+        padding: 0.75rem; /* Padding for buttons */
+        border: none; /* Remove default border */
+        border-radius: 5px; /* Rounded corners for buttons */
+        transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Primary button color */
+        color: white; /* Text color */
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            transform: translateY(-2px); /* Slight upward movement on hover */
+        }
+
+    .text-danger {
+        color: #dc3545; /* Danger text color */
+        margin-top: 1rem; /* Space above the error message */
     }
 </style>
 

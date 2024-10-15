@@ -1,53 +1,157 @@
 ﻿@model LecturerHourlyClaimApp.Models.SubmitClaimViewModel
 
-<h2>Submit a Claim</h2>
+<style>
+    body {
+        background-color: #007bff; /* Blue background */
+        font-family: 'Arial', sans-serif; /* Modern font */
+        color: #333; /* Dark text color for contrast */
+    }
 
-<form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label asp-for="StartDate">Claim Start Date</label>
-        <input asp-for="StartDate" class="form-control" type="date" />
-        <span asp-validation-for="StartDate" class="text-danger"></span>
+    .submit-claim-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+        overflow-y: auto; /* Allow vertical scrolling if needed */
+    }
+
+    .submit-claim-box {
+        background-color: white; /* White background for the claim box */
+        padding: 2rem; /* Padding inside the box */
+        border-radius: 10px; /* Slightly rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+        width: 400px; /* Fixed width for the claim box */
+        text-align: center; /* Center text alignment */
+    }
+
+    h2 {
+        font-size: 1.8rem; /* Larger font size for heading */
+        margin-bottom: 1.5rem; /* Space below heading */
+    }
+
+    .form-group {
+        margin-bottom: 1rem; /* Space between form elements */
+        text-align: left; /* Align labels and inputs to the left */
+    }
+
+    .form-row {
+        display: flex; /* Use flexbox for layout */
+        justify-content: space-between; /* Space out items evenly */
+        margin-bottom: 1rem; /* Space below form rows */
+    }
+
+        .form-row > div {
+            flex: 1; /* Equal width for columns */
+            margin-right: 0.5rem; /* Space between columns */
+        }
+
+            .form-row > div:last-child {
+                margin-right: 0; /* Remove margin from the last column */
+            }
+
+    label {
+        display: block; /* Block display for labels */
+        margin-bottom: 0.5rem; /* Space below labels */
+    }
+
+    input, textarea {
+        width: 100%; /* Full width for inputs and textareas */
+        padding: 0.5rem; /* Padding for input fields */
+        border: 1px solid #ccc; /* Border for input fields */
+        border-radius: 5px; /* Rounded corners for inputs */
+        transition: border-color 0.3s; /* Smooth border color change */
+    }
+
+        input:focus, textarea:focus {
+            border-color: #007bff; /* Change border color on focus */
+            outline: none; /* Remove outline */
+        }
+
+    .btn {
+        margin-top: 1rem; /* Space above the button */
+        width: 100%; /* Full width for buttons */
+        padding: 0.75rem; /* Padding for buttons */
+        border: none; /* Remove default border */
+        border-radius: 5px; /* Rounded corners for buttons */
+        transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Primary button color */
+        color: white; /* Text color */
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            transform: translateY(-2px); /* Slight upward movement on hover */
+        }
+
+    .text-danger {
+        color: #dc3545; /* Danger text color */
+        margin-top: 0.5rem; /* Space above the error message */
+    }
+
+    .alert {
+        margin-top: 1rem; /* Space above the alert */
+        text-align: left; /* Align alert text to the left */
+    }
+</style>
+
+<div class="submit-claim-container">
+    <div class="submit-claim-box">
+        <h2>Submit a Claim</h2>
+
+        <form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="StartDate">Claim Start Date</label>
+                    <input asp-for="StartDate" class="form-control" type="date" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndDate">Claim End Date</label>
+                    <input asp-for="EndDate" class="form-control" type="date" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="HoursWorked">Hours Worked</label>
+                    <input asp-for="HoursWorked" class="form-control" />
+                    <span asp-validation-for="HoursWorked" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Hourly Rate</label>
+                    <input value="@Model.HourlyRate" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Notes">Notes</label>
+                <textarea asp-for="Notes" class="form-control" data-val="false"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Supporting Document:</label>
+                <input type="file" asp-for="SupportingDocument" class="form-control" />
+                <span asp-validation-for="SupportingDocument" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Claim</button>
+        </form>
+
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success">
+                @ViewBag.Message
+            </div>
+
+            <p><strong>Total Claim: </strong>@ViewBag.TotalClaim</p> <!-- Use ViewBag.TotalClaim -->
+        }
     </div>
-
-    <div class="form-group">
-        <label asp-for="EndDate">Claim End Date</label>
-        <input asp-for="EndDate" class="form-control" type="date" />
-        <span asp-validation-for="EndDate" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="HoursWorked">Hours Worked</label>
-        <input asp-for="HoursWorked" class="form-control" />
-        <span asp-validation-for="HoursWorked" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label>Hourly Rate</label>
-        <input value="@Model.HourlyRate" class="form-control" readonly />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Notes">Notes</label>
-        <textarea asp-for="Notes" class="form-control" data-val="false"></textarea>
-        <span asp-validation-for="Notes" class="text-danger"></span>
-    </div>
-        <div>
-        <label>Supporting Document:</label>
-        <input type="file" asp-for="SupportingDocument" />
-        <span asp-validation-for="SupportingDocument" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit Claim</button>
-</form>
-
-@if (ViewBag.Message != null)
-{
-    <div class="alert alert-success">
-        @ViewBag.Message
-    </div>
-
-    <p><strong>Total Claim: </strong>@ViewBag.TotalClaim</p> <!-- Use ViewBag.TotalClaim -->
-}
+</div>
 
 @section Scripts {
     @{
@@ -63,4 +167,3 @@
         $('#Notes').removeAttr('aria-required');
     });
 </script>
-

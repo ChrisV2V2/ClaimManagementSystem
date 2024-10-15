@@ -1,6 +1,41 @@
-﻿<h2>Admin Main Menu</h2>
-<p>Welcome, Admin! You can manage claims here.</p>
+﻿<style>
+    body {
+        background-color: #007bff; /* Blue background */
+    }
 
-<ul>
-    <li><a asp-action="PendingClaims">View Pending Claims</a></li>
-</ul>
+    .menu-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+    }
+
+    .menu-box {
+        background-color: white; /* White background for the menu box */
+        padding: 2rem; /* Padding inside the box */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        width: 390px; /* Fixed width for the menu box */
+        text-align: center; /* Center text alignment */
+    }
+
+    .btn {
+        margin-top: 1rem; /* Space above the button */
+        width: 50%; /* Full width for buttons */
+    }
+</style>
+
+<div class="menu-container">
+    <div class="menu-box">
+        <h2>Admin Main Menu</h2>
+        <p>Welcome, Admin! You can manage claims here.</p>
+
+        <form method="get" asp-controller="Home" asp-action="PendingClaims">
+            <button type="submit" class="btn btn-primary">View Claims</button>
+        </form>
+
+        <form method="post" asp-controller="Home" asp-action="Logout">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+</div>

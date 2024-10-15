@@ -1,60 +1,111 @@
 ﻿@model IEnumerable<LecturerHourlyClaimApp.Models.Claim>
 
-<h2>Pending Claims</h2>
+<style>
+    body {
+        background-color: #007bff; /* Blue background */
+    }
 
-@if (Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Claim ID</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Hours Worked</th>
-                <th>Hourly Rate</th>
-                <th>Total Claim</th>
-                <th>Notes</th>
-                <th>Supporting Document</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var claim in Model)
-            {
-                <tr>
-                    <td>@claim.Id</td>
-                    <td>@claim.StartDate.ToShortDateString()</td>
-                    <td>@claim.EndDate.ToShortDateString()</td>
-                    <td>@claim.HoursWorked</td>
-                    <td>@claim.HourlyRate.ToString("C")</td>
-                    <td>@claim.TotalClaim.ToString("C")</td>
-                    <td>@claim.Notes</td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
-                        {
-                            <a href="@claim.SupportingDocumentPath" target="_blank">View Document</a>
-                        }
-                        else
-                        {
-                            <span>No Document</span>
-                        }
-                    </td>
-                    <td>
-                        <form asp-action="UpdateAdminComment" method="post">
-                            <input type="hidden" name="Id" value="@claim.Id" />
-                            <textarea name="AdminComment" rows="2" cols="30" placeholder="Leave a comment...">@claim.AdminComment</textarea>
-                            <div>
-                                <button type="submit" formaction="@Url.Action("VerifyClaim", new { id = claim.Id })" class="btn btn-success">Approve</button>
-                                <button type="submit" formaction="@Url.Action("RejectClaim", new { id = claim.Id })" class="btn btn-danger">Reject</button>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No pending claims available.</p>
-}
+    .claims-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+    }
+
+    .claims-box {
+        background-color: white; /* White background for the claims box */
+        padding: 2rem; /* Padding inside the box */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        width: 90%; /* Responsive width */
+        max-width: 1000px; /* Maximum width for larger screens */
+        overflow-x: auto; /* Allow horizontal scroll if needed */
+    }
+
+    table {
+        width: 100%; /* Full width for the table */
+        border-collapse: collapse; /* Collapse borders for a cleaner look */
+    }
+
+    th, td {
+        padding: 0.5rem; /* Padding for table cells */
+        text-align: left; /* Left align text */
+        border: 1px solid #dee2e6; /* Border for table cells */
+    }
+
+    th {
+        background-color: #f8f9fa; /* Light grey background for header */
+    }
+
+    .btn {
+        margin-top: 0.5rem; /* Space above buttons */
+        width: 48%; /* Button width for better alignment */
+    }
+
+    .text-danger {
+        color: red; /* Red color for error messages */
+    }
+</style>
+
+<div class="claims-container">
+    <div class="claims-box">
+        <h2>Pending Claims</h2>
+
+        @if (Model.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Claim ID</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Hours Worked</th>
+                        <th>Hourly Rate</th>
+                        <th>Total Claim</th>
+                        <th>Notes</th>
+                        <th>Supporting Document</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var claim in Model)
+                    {
+                        <tr>
+                            <td>@claim.Id</td>
+                            <td>@claim.StartDate.ToShortDateString()</td>
+                            <td>@claim.EndDate.ToShortDateString()</td>
+                            <td>@claim.HoursWorked</td>
+                            <td>@claim.HourlyRate.ToString("C")</td>
+                            <td>@claim.TotalClaim.ToString("C")</td>
+                            <td>@claim.Notes</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
+                                {
+                                    <a href="@claim.SupportingDocumentPath" target="_blank">View Document</a>
+                                }
+                                else
+                                {
+                                    <span>No Document</span>
+                                }
+                            </td>
+                            <td>
+                                <form asp-action="UpdateAdminComment" method="post">
+                                    <input type="hidden" name="Id" value="@claim.Id" />
+                                    <textarea name="AdminComment" rows="2" cols="30" placeholder="Leave a comment...">@claim.AdminComment</textarea>
+                                    <div>
+                                        <button type="submit" formaction="@Url.Action("VerifyClaim", new { id = claim.Id })" class="btn btn-success">Approve</button>
+                                        <button type="submit" formaction="@Url.Action("RejectClaim", new { id = claim.Id })" class="btn btn-danger">Reject</button>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No pending claims available.</p>
+        }
+    </div>
+</div>
