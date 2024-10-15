@@ -2,7 +2,7 @@
 
 <h2>Submit a Claim</h2>
 
-<form asp-action="SubmitClaim" method="post">
+<form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="StartDate">Claim Start Date</label>
         <input asp-for="StartDate" class="form-control" type="date" />
@@ -31,7 +31,7 @@
         <textarea asp-for="Notes" class="form-control" data-val="false"></textarea>
         <span asp-validation-for="Notes" class="text-danger"></span>
     </div>
-    <div>
+        <div>
         <label>Supporting Document:</label>
         <input type="file" asp-for="SupportingDocument" />
         <span asp-validation-for="SupportingDocument" class="text-danger"></span>

@@ -148,6 +148,11 @@ namespace LecturerHourlyClaimApp.Controllers
                 // Check if a file has been uploaded
                 if (model.SupportingDocument != null && model.SupportingDocument.Length > 0)
                 {
+                    if (!model.SupportingDocument.ContentType.Equals("application/pdf"))
+                    {
+                        ModelState.AddModelError("SupportingDocument", "Please upload a valid PDF document.");
+                        return View(model);
+                    }
                     // Set the path where you want to save the uploaded file
                     var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Documents");
                     var filePath = Path.Combine(uploadsFolder, model.SupportingDocument.FileName);
@@ -183,7 +188,7 @@ namespace LecturerHourlyClaimApp.Controllers
 
 
 
-                // Add the claim to the list
+               // Add the claim to the list
                 claims.Add(newClaim);
 
                 ViewBag.Message = "Your claim has been successfully submitted!";
