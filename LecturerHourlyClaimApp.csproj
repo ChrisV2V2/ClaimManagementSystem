@@ -19,8 +19,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.10" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\Document\" />
-  </ItemGroup>
-
 </Project>

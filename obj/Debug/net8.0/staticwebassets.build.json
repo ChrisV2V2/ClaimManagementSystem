@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ANkPht51eritOGjnY4y/LuCcCPEiwu1CBYFeXsNamhY=",
+  "Hash": "z16iEAkSjFUphe0qVuK1OfLH30uzd+BM4zznmxR8YBk=",
   "Source": "LecturerHourlyClaimApp",
   "BasePath": "_content/LecturerHourlyClaimApp",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\wwwroot\\Documents\\DBAS6211_Assignment 1_Christo Mienie_ST10302044.pdf",
+      "SourceId": "LecturerHourlyClaimApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\wwwroot\\",
+      "BasePath": "_content/LecturerHourlyClaimApp",
+      "RelativePath": "Documents/DBAS6211_Assignment 1_Christo Mienie_ST10302044.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Documents\\DBAS6211_Assignment 1_Christo Mienie_ST10302044.pdf"
     },
     {
       "Identity": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\wwwroot\\favicon.ico",

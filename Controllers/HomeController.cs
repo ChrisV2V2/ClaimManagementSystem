@@ -153,8 +153,9 @@ namespace LecturerHourlyClaimApp.Controllers
                         ModelState.AddModelError("SupportingDocument", "Please upload a valid PDF document.");
                         return View(model);
                     }
+
                     // Set the path where you want to save the uploaded file
-                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Documents");
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Documents");
                     var filePath = Path.Combine(uploadsFolder, model.SupportingDocument.FileName);
 
                     // Ensure the folder exists
@@ -169,8 +170,8 @@ namespace LecturerHourlyClaimApp.Controllers
                         model.SupportingDocument.CopyTo(stream);
                     }
 
-                    // Assign the path to the claim
-                    model.SupportingDocumentPath = filePath;
+                    // Assign the relative path to the claim
+                    model.SupportingDocumentPath = $"/Documents/{model.SupportingDocument.FileName}";
                 }
 
                 // Create a new claim from the submitted data
