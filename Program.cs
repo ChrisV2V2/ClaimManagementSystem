@@ -1,3 +1,5 @@
+using LecturerHourlyClaimApp.Data;
+
 namespace LecturerHourlyClaimApp
 {
     public class Program
@@ -9,6 +11,7 @@ namespace LecturerHourlyClaimApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<LecturerDbContext>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

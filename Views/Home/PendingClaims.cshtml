@@ -1,0 +1,43 @@
+﻿@model IEnumerable<LecturerHourlyClaimApp.Models.Claim>
+
+<h2>Pending Claims</h2>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Hours Worked</th>
+                <th>Hourly Rate</th>
+                <th>Total Claim</th>
+                <th>Notes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr>
+                    <td>@claim.Id</td>
+                    <td>@claim.StartDate.ToShortDateString()</td>
+                    <td>@claim.EndDate.ToShortDateString()</td>
+                    <td>@claim.HoursWorked</td>
+                    <td>@claim.HourlyRate.ToString("C")</td>
+                    <td>@claim.TotalClaim.ToString("C")</td>
+                    <td>@claim.Notes</td>
+                    <td>
+                        <a asp-action="VerifyClaim" asp-route-id="@claim.Id" class="btn btn-success">Verify</a>
+                        <a asp-action="RejectClaim" asp-route-id="@claim.Id" class="btn btn-danger">Reject</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No pending claims available.</p>
+}
