@@ -10,5 +10,10 @@
         public string Notes { get; set; }
         public string Status { get; set; } // e.g., Pending, Verified, Rejected
         public string SupportingDocumentPath { get; set; }
+
+        public decimal TotalClaim => HoursWorked * HourlyRate;
+
+        public string AdminComment { get; set; }
+
     }
 }

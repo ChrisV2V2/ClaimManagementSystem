@@ -23,5 +23,7 @@ namespace LecturerHourlyClaimApp.Models
         // Navigation property to the Person
         public virtual Person Person { get; set; }
         public decimal TotalClaim => HoursWorked * HourlyRate;
+
+        public string AdminComment { get; set; }
     }
 }

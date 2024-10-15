@@ -109,6 +109,7 @@ namespace LecturerHourlyClaimApp.Controllers
             {
                 claim.Status = "Rejected";
                 TempData["Message"] = $"Claim #{id} has been rejected.";
+                
             }
             return RedirectToAction("PendingClaims");
         }
@@ -121,6 +122,8 @@ namespace LecturerHourlyClaimApp.Controllers
             };
             return View(model);
         }
+
+
 
         private string GetClaimStatus(Claim claim)
         {
@@ -148,7 +151,8 @@ namespace LecturerHourlyClaimApp.Controllers
                     HourlyRate = c.HourlyRate,
                     Notes = c.Notes,
                     Status = GetClaimStatus(c), // Use the helper method to determine status
-                    SupportingDocumentPath = c.SupportingDocumentPath
+                    SupportingDocumentPath = c.SupportingDocumentPath,
+                    AdminComment = c.AdminComment
                 }).ToList();
 
             // Log number of claims found
@@ -161,6 +165,38 @@ namespace LecturerHourlyClaimApp.Controllers
         {
             return RedirectToAction("Index"); // Redirects to the login page
         }
+
+        // Update admin comment and handle approval
+        [HttpPost]
+        public IActionResult UpdateAdminComment(Claim model)
+        {
+            var claim = claims.FirstOrDefault(c => c.Id == model.Id);
+            if (claim != null)
+            {
+                if (Request.Form.ContainsKey("Approve"))
+                {
+                    claim.Status = "Approved";
+                    claim.AdminComment = model.AdminComment; // This line should set the comment
+                    TempData["Message"] = $"Claim #{model.Id} has been approved.";
+                }
+                else if (Request.Form.ContainsKey("Reject"))
+                {
+                    if (string.IsNullOrWhiteSpace(model.AdminComment))
+                    {
+                        ModelState.AddModelError("", "Admin comment is required for rejecting a claim.");
+                        return View("PendingClaims", claims); // Return to the pending claims view with the model
+                    }
+
+                    claim.Status = "Rejected";
+                    claim.AdminComment = model.AdminComment; // This line should also set the comment
+                    TempData["Message"] = $"Claim #{model.Id} has been rejected.";
+                }
+            }
+            return RedirectToAction("PendingClaims");
+        }
+
+
+
 
         // Handle the Submit Claim form submission
         [HttpPost]
@@ -221,7 +257,8 @@ namespace LecturerHourlyClaimApp.Controllers
                     HourlyRate = model.HourlyRate,
                     Notes = model.Notes,
                     SupportingDocumentPath = model.SupportingDocumentPath, // Assign the document path
-                    PersonId = 1 // Set to a valid PersonId as needed
+                    PersonId = 1, // Set to a valid PersonId as needed
+                    Status = "Pending"
                 };
 
 

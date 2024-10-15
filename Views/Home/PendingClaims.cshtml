@@ -14,7 +14,7 @@
                 <th>Hourly Rate</th>
                 <th>Total Claim</th>
                 <th>Notes</th>
-                <th>Supporting Document</th> <!-- New column for the document -->
+                <th>Supporting Document</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -40,8 +40,14 @@
                         }
                     </td>
                     <td>
-                        <a asp-action="VerifyClaim" asp-route-id="@claim.Id" class="btn btn-success">Verify</a>
-                        <a asp-action="RejectClaim" asp-route-id="@claim.Id" class="btn btn-danger">Reject</a>
+                        <form asp-action="UpdateAdminComment" method="post">
+                            <input type="hidden" name="Id" value="@claim.Id" />
+                            <textarea name="AdminComment" rows="2" cols="30" placeholder="Leave a comment...">@claim.AdminComment</textarea>
+                            <div>
+                                <button type="submit" formaction="@Url.Action("VerifyClaim", new { id = claim.Id })" class="btn btn-success">Approve</button>
+                                <button type="submit" formaction="@Url.Action("RejectClaim", new { id = claim.Id })" class="btn btn-danger">Reject</button>
+                            </div>
+                        </form>
                     </td>
                 </tr>
             }
