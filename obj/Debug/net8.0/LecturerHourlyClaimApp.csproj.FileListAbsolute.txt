@@ -39,3 +39,4 @@ C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\refint\Lectu
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.pdb
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\LecturerHourlyClaimApp.genruntimeconfig.cache
 C:\Users\chris\source\repos\LecturerHourlyClaimApp\obj\Debug\net8.0\ref\LecturerHourlyClaimApp.dll
+C:\Users\chris\source\repos\LecturerHourlyClaimApp\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll

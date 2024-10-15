@@ -1,3 +1,4 @@
+using LecturerHourlyClaimApp.Data;
 using LecturerHourlyClaimApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -39,18 +40,23 @@ namespace LecturerHourlyClaimApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (_users.TryGetValue(model.Username, out var userInfo) && userInfo.password == model.Password)
+                LecturerDbContext db = new LecturerDbContext();
+                db.Database.EnsureCreated();
+                var userInfo = db.Users.FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password);  
+                if (userInfo != null)
+                {
+                    // Redirect based on the role
+                    if (userInfo.Role == "Lecturer")
                     {
-                        // Redirect based on the role
-                        if (userInfo.role == "Lecturer")
-                        {
-                            return RedirectToAction("LecturerMenu");
-                        }
-                        else if (userInfo.role == "Admin")
-                        {
-                            return RedirectToAction("AdminMenu");
-                        }
+                        return RedirectToAction("LecturerMenu");
                     }
+                    else if (userInfo.Role == "Admin")
+                    {
+                        return RedirectToAction("AdminMenu");
+                    }
+                }
+
+                   
 
                     // Invalid credentials
                     ModelState.AddModelError("", "Invalid username or password.");
@@ -111,6 +117,11 @@ namespace LecturerHourlyClaimApp.Controllers
                 HourlyRate = 50m // Hardcoded hourly rate
             };
             return View(model);
+        }
+
+        public IActionResult Logout()
+        {
+            return RedirectToAction("Index"); // Redirects to the login page
         }
 
         // Handle the Submit Claim form submission
