@@ -4,7 +4,7 @@ namespace LecturerHourlyClaimApp.Models
 {
     public class SubmitClaimViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Hours worked are required.")]
         [Range(0, 1000, ErrorMessage = "Please enter a valid number of hours.")]
         public int HoursWorked { get; set; }
 
