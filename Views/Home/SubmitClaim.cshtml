@@ -31,6 +31,11 @@
         <textarea asp-for="Notes" class="form-control" data-val="false"></textarea>
         <span asp-validation-for="Notes" class="text-danger"></span>
     </div>
+    <div>
+        <label>Supporting Document:</label>
+        <input type="file" asp-for="SupportingDocument" />
+        <span asp-validation-for="SupportingDocument" class="text-danger"></span>
+    </div>
 
     <button type="submit" class="btn btn-primary">Submit Claim</button>
 </form>

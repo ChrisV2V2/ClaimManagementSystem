@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
+using Claim = LecturerHourlyClaimApp.Models.Claim;
 
 namespace LecturerHourlyClaimApp.Controllers
 {
@@ -138,8 +139,37 @@ namespace LecturerHourlyClaimApp.Controllers
                     return View(model);
                 }
 
+                if (model.HoursWorked <= 0)
+                {
+                    ModelState.AddModelError("HoursWorked", "Hours worked must be greater than zero.");
+                    return View(model);
+                }
+
+                // Check if a file has been uploaded
+                if (model.SupportingDocument != null && model.SupportingDocument.Length > 0)
+                {
+                    // Set the path where you want to save the uploaded file
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Documents");
+                    var filePath = Path.Combine(uploadsFolder, model.SupportingDocument.FileName);
+
+                    // Ensure the folder exists
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    // Save the file
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        model.SupportingDocument.CopyTo(stream);
+                    }
+
+                    // Assign the path to the claim
+                    model.SupportingDocumentPath = filePath;
+                }
+
                 // Create a new claim from the submitted data
-                var newClaim = new LecturerHourlyClaimApp.Models.Claim
+                var newClaim = new Claim
                 {
                     Id = claims.Count + 1, // Simple ID assignment
                     StartDate = model.StartDate,
@@ -147,8 +177,11 @@ namespace LecturerHourlyClaimApp.Controllers
                     HoursWorked = model.HoursWorked,
                     HourlyRate = model.HourlyRate,
                     Notes = model.Notes,
+                    SupportingDocumentPath = model.SupportingDocumentPath, // Assign the document path
                     PersonId = 1 // Set to a valid PersonId as needed
                 };
+
+
 
                 // Add the claim to the list
                 claims.Add(newClaim);

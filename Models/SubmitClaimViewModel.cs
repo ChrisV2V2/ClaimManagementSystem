@@ -23,6 +23,11 @@ namespace LecturerHourlyClaimApp.Models
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; } = DateTime.Today.AddDays(1);//End date is one day after the current date
 
+
+        public IFormFile? SupportingDocument { get; set; }
+
+        public string? SupportingDocumentPath { get; set; }
+
         // This property will calculate the total claim
         public decimal TotalClaim => HoursWorked * HourlyRate;
     }

@@ -14,6 +14,7 @@
                 <th>Hourly Rate</th>
                 <th>Total Claim</th>
                 <th>Notes</th>
+                <th>Supporting Document</th> <!-- New column for the document -->
                 <th>Actions</th>
             </tr>
         </thead>
@@ -28,6 +29,16 @@
                     <td>@claim.HourlyRate.ToString("C")</td>
                     <td>@claim.TotalClaim.ToString("C")</td>
                     <td>@claim.Notes</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
+                        {
+                            <a href="@claim.SupportingDocumentPath" target="_blank">View Document</a>
+                        }
+                        else
+                        {
+                            <span>No Document</span>
+                        }
+                    </td>
                     <td>
                         <a asp-action="VerifyClaim" asp-route-id="@claim.Id" class="btn btn-success">Verify</a>
                         <a asp-action="RejectClaim" asp-route-id="@claim.Id" class="btn btn-danger">Reject</a>
