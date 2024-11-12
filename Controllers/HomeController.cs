@@ -5,12 +5,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
+using LecturerHourlyClaimApp.Services;//Stores the majority of the systems automation features
 using Claim = LecturerHourlyClaimApp.Models.Claim;
 
 namespace LecturerHourlyClaimApp.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly ClaimVerificationService _verificationService;
+
+        public HomeController()
+        {
+            // Initialize the verification service
+            _verificationService = new ClaimVerificationService();
+        }
+
         // Hardcoded user credentials
         private readonly Dictionary<string, (string password, string role)> _users = new Dictionary<string, (string password, string role)>
         {
@@ -90,9 +100,18 @@ namespace LecturerHourlyClaimApp.Controllers
             var claim = claims.FirstOrDefault(c => c.Id == id);
             if (claim != null)
             {
-                claim.Status = "Approved";
-                claim.AdminComment = adminComment; // Set the admin comment
-                TempData["Message"] = $"Claim #{id} has been verified.";
+                var verificationResult = _verificationService.VerifyClaim(claim);
+
+                if (!verificationResult.IsValid)
+                {
+                    TempData["Error"] = $"Claim #{id} cannot be verified: {verificationResult.Message}";
+                }
+                else
+                {
+                    claim.Status = "Approved";
+                    claim.AdminComment = adminComment;
+                    TempData["Message"] = $"Claim #{id} has been verified and approved.";
+                }
             }
             return RedirectToAction("PendingClaims");
         }
@@ -100,11 +119,16 @@ namespace LecturerHourlyClaimApp.Controllers
         // Reject a claim by ID (admin functionality)
         public IActionResult RejectClaim(int id, string adminComment)
         {
+            if (string.IsNullOrWhiteSpace(adminComment))
+            {
+                TempData["Error"] = "You must provide a note when rejecting a claim.";
+                return RedirectToAction("PendingClaims");
+            }
             var claim = claims.FirstOrDefault(c => c.Id == id);
             if (claim != null)
             {
                 claim.Status = "Rejected";
-                claim.AdminComment = adminComment; // Set the admin comment
+                claim.AdminComment = adminComment;
                 TempData["Message"] = $"Claim #{id} has been rejected.";
             }
             return RedirectToAction("PendingClaims");
@@ -179,36 +203,7 @@ namespace LecturerHourlyClaimApp.Controllers
                     return View(model);
                 }
 
-                // Check if a file has been uploaded
-                if (model.SupportingDocument != null && model.SupportingDocument.Length > 0)
-                {
-                    if (!model.SupportingDocument.ContentType.Equals("application/pdf"))
-                    {
-                        ModelState.AddModelError("SupportingDocument", "Please upload a valid PDF document.");
-                        return View(model);
-                    }
-
-                    // Set the path where you want to save the uploaded file
-                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Documents");
-                    var filePath = Path.Combine(uploadsFolder, model.SupportingDocument.FileName);
-
-                    // Ensure the folder exists
-                    if (!Directory.Exists(uploadsFolder))
-                    {
-                        Directory.CreateDirectory(uploadsFolder);
-                    }
-
-                    // Save the file
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        model.SupportingDocument.CopyTo(stream);
-                    }
-
-                    // Assign the relative path to the claim
-                    model.SupportingDocumentPath = $"/Documents/{model.SupportingDocument.FileName}";
-                }
-
-                // Create a new claim from the submitted data
+                // Create a new claim object based on the model input
                 var newClaim = new Claim
                 {
                     Id = claims.Count + 1, // Simple ID assignment
@@ -217,12 +212,46 @@ namespace LecturerHourlyClaimApp.Controllers
                     HoursWorked = model.HoursWorked,
                     HourlyRate = model.HourlyRate,
                     Notes = model.Notes,
-                    SupportingDocumentPath = model.SupportingDocumentPath, // Assign the document path
                     PersonId = 1, // Set to a valid PersonId as needed
                     Status = "Pending"
                 };
 
-                // Add the claim to the list
+                // Verify the claim using ClaimVerificationService
+                var verificationResult = _verificationService.VerifyClaim(newClaim);
+
+                if (!verificationResult.IsValid)
+                {
+                    // Add verification error message to ModelState if claim is invalid
+                    ModelState.AddModelError("", verificationResult.Message);
+                    return View(model);
+                }
+
+                // Add supporting document logic if verified
+                if (model.SupportingDocument != null && model.SupportingDocument.Length > 0)
+                {
+                    if (!model.SupportingDocument.ContentType.Equals("application/pdf"))
+                    {
+                        ModelState.AddModelError("SupportingDocument", "Please upload a valid PDF document.");
+                        return View(model);
+                    }
+
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Documents");
+                    var filePath = Path.Combine(uploadsFolder, model.SupportingDocument.FileName);
+
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        model.SupportingDocument.CopyTo(stream);
+                    }
+
+                    newClaim.SupportingDocumentPath = $"/Documents/{model.SupportingDocument.FileName}";
+                }
+
+                // Add claim to the list after passing verification
                 claims.Add(newClaim);
 
                 ViewBag.Message = "Your claim has been successfully submitted!";

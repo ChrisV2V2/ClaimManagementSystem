@@ -101,6 +101,16 @@
     <div class="submit-claim-box">
         <h2>Submit a Claim</h2>
 
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
+            </div>
+        }
+
         <form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
             <div class="form-row">
                 <div class="form-group">
