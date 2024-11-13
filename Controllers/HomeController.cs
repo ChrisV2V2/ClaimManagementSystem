@@ -173,6 +173,17 @@ namespace LecturerHourlyClaimApp.Controllers
                     AdminComment = c.AdminComment
                 }).ToList();
 
+            var totalPayout = lecturerClaims
+                .Where(c => c.Status == "Approved") // Filter to only approved claims
+                .Sum(c => c.HoursWorked * c.HourlyRate); // Calculate the sum for approved claims
+
+                       // Log the number of claims found and the total payout
+                   Console.WriteLine($"Lecturer Claims Found: {lecturerClaims.Count}");
+                   Console.WriteLine($"Total Approved Claims Payout: {totalPayout}");
+
+            // Pass the total payout to the view
+            ViewBag.TotalPayout = totalPayout;
+
             // Log number of claims found
             Console.WriteLine($"Lecturer Claims Found: {lecturerClaims.Count}");
 
