@@ -15,8 +15,6 @@ namespace LecturerHourlyClaimApp.Models
         public string Notes { get; set; }
         public string? SupportingDocumentPath { get; set; }
 
-        public string Status { get; set; }
-
         // Foreign key to link claim with a person
         public int PersonId { get; set; }
 
@@ -25,5 +23,10 @@ namespace LecturerHourlyClaimApp.Models
         public decimal TotalClaim => HoursWorked * HourlyRate;
 
         public string AdminComment { get; set; }
+
+        public bool IsAdminApproved { get; set; } // Step 1 approval by Admin
+        public bool IsManagerApproved { get; set; } // Step 2 approval by Academic Manager
+
+        public string Status { get; set; }
     }
 }

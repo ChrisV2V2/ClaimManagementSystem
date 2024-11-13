@@ -10,16 +10,16 @@ namespace LecturerHourlyClaimApp.Data
         public DbSet<Claim> Claims { get; set; }
         public DbSet<User> Users { get; set; }
 
-       
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName:"Claims");
+            optionsBuilder.UseInMemoryDatabase(databaseName: "Claims");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
 
             // Define primary keys
             modelBuilder.Entity<Person>().HasKey(p => p.Id);
@@ -32,7 +32,7 @@ namespace LecturerHourlyClaimApp.Data
                 .WithMany(p => p.Claims)
                 .HasForeignKey(c => c.PersonId);
 
-           
+
 
             // Seed data for Persons
             modelBuilder.Entity<Person>().HasData(
@@ -41,11 +41,44 @@ namespace LecturerHourlyClaimApp.Data
             );
 
             // Seed data for Claims (if needed)
-            modelBuilder.Entity<Claim>().HasData(
-                new Claim { Id = 1, StartDate = DateTime.Now.AddDays(-7), EndDate = DateTime.Now.AddDays(-1), HoursWorked = 10, HourlyRate = 50, PersonId = 1, Notes = "Sample claim for John Doe", Status = "Pending", AdminComment = "Seems fine" },
-                new Claim { Id = 2, StartDate = DateTime.Now.AddDays(-5), EndDate = DateTime.Now.AddDays(-2), HoursWorked = 8, HourlyRate = 50, PersonId = 2, Notes = "Sample claim for Jane Smith", Status = "Pending", AdminComment = "These hours do not match our records" }
-            );
-            base.OnModelCreating(modelBuilder);
+            {
+                base.OnModelCreating(modelBuilder);
+
+                // Define the initial seed data for claims
+                var claims = new List<Claim>
+            {
+                new Claim
+                {
+                    Id = 1,
+                    StartDate = DateTime.Now.AddDays(-7),
+                    EndDate = DateTime.Now.AddDays(-1),
+                    HoursWorked = 10,
+                    HourlyRate = 50,
+                    PersonId = 1,
+                    Notes = "Sample claim for John Doe",
+                    AdminComment = "Seems fine",
+                    Status = "Pending"
+                },
+                new Claim
+                {
+                    Id = 2,
+                    StartDate = DateTime.Now.AddDays(-5),
+                    EndDate = DateTime.Now.AddDays(-2),
+                    HoursWorked = 8,
+                    HourlyRate = 50,
+                    PersonId = 2,
+                    Notes = "Sample claim for Jane Smith",
+                    AdminComment = "These hours do not match our records",
+                    Status = "Pending"
+                }
+            };
+
+
+
+                // Seed the claims into the database
+                modelBuilder.Entity<Claim>().HasData(claims);
+            }
         }
     }
 }
+

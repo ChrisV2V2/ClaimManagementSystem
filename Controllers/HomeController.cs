@@ -25,16 +25,18 @@ namespace LecturerHourlyClaimApp.Controllers
         private readonly Dictionary<string, (string password, string role)> _users = new Dictionary<string, (string password, string role)>
         {
             { "lecturer", ("password123", "Lecturer") },
-            { "admin", ("adminpass", "Admin") }
+            { "admin", ("adminpass", "Admin") },
+            { "academicManager", ("managerpass", "AcademicManager") }
         };
 
         private static List<LecturerHourlyClaimApp.Models.Claim> claims = new List<LecturerHourlyClaimApp.Models.Claim>
         {
-            new LecturerHourlyClaimApp.Models.Claim { Id = 1, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(1), HoursWorked = 8, HourlyRate = 50, Notes = "Worked on project", PersonId = 1, Status = "Pending" },
+            new LecturerHourlyClaimApp.Models.Claim { Id = 1, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(1), HoursWorked = 8, HourlyRate = 50, Notes = "Worked on project", PersonId = 1, Status = "Pending"},
             new LecturerHourlyClaimApp.Models.Claim { Id = 2, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(2), HoursWorked = 6, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Pending"},
             new LecturerHourlyClaimApp.Models.Claim { Id = 3, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(4), HoursWorked = 15, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Approved"}
         };
 
+ 
         private static List<Person> persons = new List<Person>
         {
             new Person { Id = 1, FirstName = "John", LastName = "Doe", HourlyRate = 50 },
@@ -67,6 +69,10 @@ namespace LecturerHourlyClaimApp.Controllers
                     {
                         return RedirectToAction("AdminMenu");
                     }
+                    else if (userInfo.Role == "AcademicManager")
+                    {
+                        return RedirectToAction("AcademicManagerMenu");
+                    }
                 }
 
                 // Invalid credentials
@@ -89,13 +95,20 @@ namespace LecturerHourlyClaimApp.Controllers
             return View();
         }
 
+        public IActionResult AcademicManagerMenu()
+        {
+            return View();
+        }
+
+
         public IActionResult PendingClaims()
         {
-            var pendingClaims = claims.Where(c => c.Status != "Approved" && c.Status != "Rejected").ToList();//Will only retrieve claims with the pending status
+            var pendingClaims = claims.Where(c => c.Status == "Pending").ToList();//Will only retrieve claims with the pending status
             return View(pendingClaims);
         }
 
         // Verify a claim by ID (admin functionality)
+        /*
         public IActionResult VerifyClaim(int id, string adminComment)
         {
             var claim = claims.FirstOrDefault(c => c.Id == id);
@@ -116,6 +129,41 @@ namespace LecturerHourlyClaimApp.Controllers
             }
             return RedirectToAction("PendingClaims");
         }
+        */
+
+        public IActionResult ApproveClaimByAdmin(int id, string adminComment)
+        {
+            var claim = claims.FirstOrDefault(c => c.Id == id);
+            if (claim != null)
+            {
+                var verificationResult = _verificationService.VerifyClaim(claim);
+
+                if (!verificationResult.IsValid)
+                {
+                    TempData["Error"] = $"Claim #{id} cannot be verified: {verificationResult.Message}";
+                }
+                else
+                {
+                    claim.Status = "Pending Manager Approval";
+                    claim.AdminComment = adminComment;
+                    claim.IsAdminApproved = true;
+                    TempData["Message"] = $"Claim #{id} has been verified and approved.";
+                }
+            }
+            return RedirectToAction("PendingClaims");
+        }
+
+        public IActionResult ApproveClaimByManager(int id)
+        {
+            var claim = claims.FirstOrDefault(c => c.Id == id && c.IsAdminApproved);
+            if (claim != null)
+            {
+                claim.IsManagerApproved = true; // Manager approval
+                claim.Status = "Approved"; // Final approval
+            }
+            return RedirectToAction("PendingClaims");
+        }
+
 
         // Reject a claim by ID (admin functionality)
         public IActionResult RejectClaim(int id, string adminComment)
@@ -168,7 +216,7 @@ namespace LecturerHourlyClaimApp.Controllers
                     HoursWorked = c.HoursWorked,
                     HourlyRate = c.HourlyRate,
                     Notes = c.Notes,
-                    Status = GetClaimStatus(c), // Use the helper method to determine status
+                    Status = c.Status, 
                     SupportingDocumentPath = c.SupportingDocumentPath,
                     AdminComment = c.AdminComment
                 }).ToList();
@@ -225,6 +273,8 @@ namespace LecturerHourlyClaimApp.Controllers
                     HourlyRate = model.HourlyRate,
                     Notes = model.Notes,
                     PersonId = 1, // Set to a valid PersonId as needed
+                    IsAdminApproved = false,
+                    IsManagerApproved = false,
                     Status = "Pending"
                 };
 
