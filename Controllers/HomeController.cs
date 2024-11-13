@@ -33,7 +33,7 @@ namespace LecturerHourlyClaimApp.Controllers
         {
             new LecturerHourlyClaimApp.Models.Claim { Id = 1, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(1), HoursWorked = 8, HourlyRate = 50, Notes = "Worked on project", PersonId = 1, Status = "Pending"},
             new LecturerHourlyClaimApp.Models.Claim { Id = 2, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(2), HoursWorked = 6, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Pending"},
-            new LecturerHourlyClaimApp.Models.Claim { Id = 3, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(4), HoursWorked = 15, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Approved"}
+            new LecturerHourlyClaimApp.Models.Claim { Id = 3, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(4), HoursWorked = 181, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Pending"}
         };
 
  
@@ -73,6 +73,10 @@ namespace LecturerHourlyClaimApp.Controllers
                     {
                         return RedirectToAction("ManagerMenu");
                     }
+                    else if (userInfo.Role == "HR")
+                    {
+                        return RedirectToAction("HRMenu");
+                    }
                 }
 
                 // Invalid credentials
@@ -96,6 +100,11 @@ namespace LecturerHourlyClaimApp.Controllers
         }
 
         public IActionResult ManagerMenu()
+        {
+            return View();
+        }
+
+        public IActionResult HRMenu()
         {
             return View();
         }

@@ -1,0 +1,86 @@
+﻿<style>
+    body {
+        background-color: #007bff; /* Blue background */
+        font-family: 'Arial', sans-serif; /* Modern font */
+        color: #333; /* Dark text color for contrast */
+    }
+
+    .menu-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+    }
+
+    .menu-box {
+        background-color: white; /* White background for the menu box */
+        padding: 2.5rem; /* Increased padding */
+        border-radius: 10px; /* Slightly rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+        width: 390px; /* Fixed width for the menu box */
+        text-align: center; /* Center text alignment */
+        transition: transform 0.3s; /* Smooth scaling effect */
+    }
+
+        .menu-box:hover {
+            transform: translateY(-5px); /* Slight upward movement on hover */
+        }
+
+    h2 {
+        font-size: 1.8rem; /* Larger font size for heading */
+        margin-bottom: 1rem; /* Space below heading */
+    }
+
+    p {
+        font-size: 1rem; /* Standard font size for paragraph */
+        margin-bottom: 2rem; /* Space below paragraph */
+    }
+
+    .btn {
+        margin-top: 1rem; /* Space above the button */
+        width: 50%; /* Full width for buttons */
+        padding: 0.75rem; /* Padding for buttons */
+        border: none; /* Remove default border */
+        border-radius: 5px; /* Rounded corners for buttons */
+        transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Primary button color */
+        color: white; /* Text color */
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            transform: translateY(-2px); /* Slight upward movement on hover */
+        }
+
+    .btn-danger {
+        background-color: #dc3545; /* Danger button color */
+        color: white; /* Text color */
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333; /* Darker shade on hover */
+            transform: translateY(-2px); /* Slight upward movement on hover */
+        }
+</style>
+
+<div class="menu-container">
+    <div class="menu-box">
+        <h2>Human Resources Department Main Menu</h2>
+        <p>Welcome, HR! Select an option from the list below to retrieve the relevant report.</p>
+
+        <form method="get" asp-controller="Home" asp-action="ViewAllClaims">
+            <button type="submit" class="btn btn-primary">Report for All Claim</button>
+        </form>
+
+        <form method="get" asp-controller="Home" asp-action="ViewApprovedClaims">
+            <button type="submit" class="btn btn-primary">Report for Approved Claims</button>
+        </form>
+
+        <form method="post" asp-controller="Home" asp-action="Logout">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    </div>
+</div>

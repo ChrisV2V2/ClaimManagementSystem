@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Home\HRMenu.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\PendingClaims.cshtml" />
   </ItemGroup>
 
@@ -22,6 +23,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\HRMenu.cshtml" />
   </ItemGroup>
 
 </Project>
