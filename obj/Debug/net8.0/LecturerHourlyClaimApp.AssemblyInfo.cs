@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LecturerHourlyClaimApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57797511feeea38f4367efb21b3492f071b7d596")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d870ed212ade3999490110d8d7ccf7fef86b0d3e")]
 [assembly: System.Reflection.AssemblyProductAttribute("LecturerHourlyClaimApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LecturerHourlyClaimApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

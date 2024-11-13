@@ -71,7 +71,7 @@ namespace LecturerHourlyClaimApp.Controllers
                     }
                     else if (userInfo.Role == "AcademicManager")
                     {
-                        return RedirectToAction("AcademicManagerMenu");
+                        return RedirectToAction("ManagerMenu");
                     }
                 }
 
@@ -151,6 +151,12 @@ namespace LecturerHourlyClaimApp.Controllers
                 }
             }
             return RedirectToAction("PendingClaims");
+        }
+
+        public IActionResult PendingClaimsManager()
+        {
+            var pendingClaims = claims.Where(c => c.Status == "Pending Manager Approval").ToList();//Will only retrieve claims with the pending status
+            return View(pendingClaims);
         }
 
         public IActionResult ApproveClaimByManager(int id)
