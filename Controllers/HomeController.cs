@@ -95,7 +95,7 @@ namespace LecturerHourlyClaimApp.Controllers
             return View();
         }
 
-        public IActionResult AcademicManagerMenu()
+        public IActionResult ManagerMenu()
         {
             return View();
         }
@@ -153,21 +153,23 @@ namespace LecturerHourlyClaimApp.Controllers
             return RedirectToAction("PendingClaims");
         }
 
-        public IActionResult PendingClaimsManager()
+
+        public IActionResult PendingManagerClaims()
         {
             var pendingClaims = claims.Where(c => c.Status == "Pending Manager Approval").ToList();//Will only retrieve claims with the pending status
             return View(pendingClaims);
         }
 
-        public IActionResult ApproveClaimByManager(int id)
+        public IActionResult ApproveClaimByManager(int id, string adminComment)
         {
             var claim = claims.FirstOrDefault(c => c.Id == id && c.IsAdminApproved);
             if (claim != null)
             {
                 claim.IsManagerApproved = true; // Manager approval
+                claim.AdminComment = adminComment;
                 claim.Status = "Approved"; // Final approval
             }
-            return RedirectToAction("PendingClaims");
+            return RedirectToAction("PendingManagerClaims");
         }
 
 
@@ -177,7 +179,7 @@ namespace LecturerHourlyClaimApp.Controllers
             if (string.IsNullOrWhiteSpace(adminComment))
             {
                 TempData["Error"] = "You must provide a note when rejecting a claim.";
-                return RedirectToAction("PendingClaims");
+                return RedirectToAction("PendingManagerClaims");
             }
             var claim = claims.FirstOrDefault(c => c.Id == id);
             if (claim != null)
@@ -186,7 +188,7 @@ namespace LecturerHourlyClaimApp.Controllers
                 claim.AdminComment = adminComment;
                 TempData["Message"] = $"Claim #{id} has been rejected.";
             }
-            return RedirectToAction("PendingClaims");
+            return RedirectToAction("PendingManagerClaims");
         }
 
         public IActionResult SubmitClaim()
