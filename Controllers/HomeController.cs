@@ -31,7 +31,8 @@ namespace LecturerHourlyClaimApp.Controllers
         private static List<LecturerHourlyClaimApp.Models.Claim> claims = new List<LecturerHourlyClaimApp.Models.Claim>
         {
             new LecturerHourlyClaimApp.Models.Claim { Id = 1, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(1), HoursWorked = 8, HourlyRate = 50, Notes = "Worked on project", PersonId = 1, Status = "Pending" },
-            new LecturerHourlyClaimApp.Models.Claim { Id = 2, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(2), HoursWorked = 6, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Pending"}
+            new LecturerHourlyClaimApp.Models.Claim { Id = 2, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(2), HoursWorked = 6, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Pending"},
+            new LecturerHourlyClaimApp.Models.Claim { Id = 3, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(4), HoursWorked = 15, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Approved"}
         };
 
         private static List<Person> persons = new List<Person>
@@ -90,7 +91,7 @@ namespace LecturerHourlyClaimApp.Controllers
 
         public IActionResult PendingClaims()
         {
-            var pendingClaims = claims; // Retrieve claims for display
+            var pendingClaims = claims.Where(c => c.Status != "Approved" && c.Status != "Rejected").ToList();//Will only retrieve claims with the pending status
             return View(pendingClaims);
         }
 
