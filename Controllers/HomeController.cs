@@ -168,6 +168,7 @@ namespace LecturerHourlyClaimApp.Controllers
                 claim.IsManagerApproved = true; // Manager approval
                 claim.AdminComment = adminComment;
                 claim.Status = "Approved"; // Final approval
+                TempData["Message"] = $"Claim #{id} has been verified and approved.";
             }
             return RedirectToAction("PendingManagerClaims");
         }
