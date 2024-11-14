@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -13,11 +13,14 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Home\HRMenu.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\PendingClaims.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Home\ViewAllClaims.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="xunit" Version="2.9.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
       <PrivateAssets>all</PrivateAssets>
@@ -27,6 +30,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Home\HRMenu.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\ViewAllClaims.cshtml" />
   </ItemGroup>
 
 </Project>

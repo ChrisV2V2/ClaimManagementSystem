@@ -14,6 +14,7 @@
         public decimal TotalClaim => HoursWorked * HourlyRate;
 
         public string AdminComment { get; set; }
+        public int PersonId { get; set; }
 
     }
 }

@@ -33,7 +33,8 @@ namespace LecturerHourlyClaimApp.Controllers
         {
             new LecturerHourlyClaimApp.Models.Claim { Id = 1, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(1), HoursWorked = 8, HourlyRate = 50, Notes = "Worked on project", PersonId = 1, Status = "Pending"},
             new LecturerHourlyClaimApp.Models.Claim { Id = 2, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(2), HoursWorked = 6, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Pending"},
-            new LecturerHourlyClaimApp.Models.Claim { Id = 3, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(4), HoursWorked = 181, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 1, Status = "Pending"}
+            new LecturerHourlyClaimApp.Models.Claim { Id = 3, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(4), HoursWorked = 181, HourlyRate = 50, Notes = "Lectured a class", PersonId = 1, Status = "Pending"},
+            new LecturerHourlyClaimApp.Models.Claim { Id = 4, StartDate = System.DateTime.Today, EndDate = System.DateTime.Today.AddDays(4), HoursWorked = 7, HourlyRate = 50, Notes = "Lectured two classes", PersonId = 2, Status = "Pending"}
         };
 
  
@@ -109,6 +110,46 @@ namespace LecturerHourlyClaimApp.Controllers
             return View();
         }
 
+        public IActionResult ViewAllClaims()
+        {
+            // Retrieve the user ID of the logged-in user
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            int userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
+
+            // Log the user ID
+            Console.WriteLine($"User ID: {userId}"); // Log the user ID
+
+            // Get all claims in the system
+            var allClaims = claims
+                .Select(c => new TrackClaimViewModel
+                {
+                    Id = c.Id,
+                    PersonId = c.PersonId,
+                    StartDate = c.StartDate,
+                    EndDate = c.EndDate,
+                    HoursWorked = c.HoursWorked,
+                    HourlyRate = c.HourlyRate,
+                    Notes = c.Notes,
+                    Status = c.Status,
+                    SupportingDocumentPath = c.SupportingDocumentPath,
+                    AdminComment = c.AdminComment
+                }).ToList();
+
+            var totalPayout = allClaims
+                .Where(c => c.Status == "Approved") // Filter to only approved claims
+                .Sum(c => c.HoursWorked * c.HourlyRate); // Calculate the sum for approved claims
+
+            // Log the number of claims found and the total payout
+            Console.WriteLine($"Total Claims Found: {allClaims.Count}");
+            Console.WriteLine($"Total Approved Claims Payout: {totalPayout}");
+
+            // Pass the total payout to the view
+            ViewBag.TotalPayout = totalPayout;
+
+            // Return the view with all claims
+            return View(allClaims);
+
+        }
 
         public IActionResult PendingClaims()
         {
