@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.Security.Claims;
 using LecturerHourlyClaimApp.Services;//Stores the majority of the systems automation features
 using Claim = LecturerHourlyClaimApp.Models.Claim;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace LecturerHourlyClaimApp.Controllers
 {
@@ -150,6 +152,101 @@ namespace LecturerHourlyClaimApp.Controllers
             return View(allClaims);
 
         }
+
+        public IActionResult ExportClaimsToPDF()
+        {
+            // Generate claims data
+            var allClaims = claims
+                .Select(c => new TrackClaimViewModel
+                {
+                    Id = c.Id,
+                    StartDate = c.StartDate,
+                    EndDate = c.EndDate,
+                    HoursWorked = c.HoursWorked,
+                    HourlyRate = c.HourlyRate,
+                    Notes = c.Notes,
+                    Status = c.Status
+                }).ToList();
+
+            // Calculate total for approved claims
+            decimal totalApproved = allClaims
+                .Where(c => c.Status.Equals("Approved", StringComparison.OrdinalIgnoreCase))
+                .Sum(c => c.HoursWorked * c.HourlyRate);
+
+            // Create a memory stream for the PDF
+            using (var stream = new MemoryStream())
+            {
+                // Initialize iTextSharp PDF document
+                Document pdfDoc = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+
+                // Add a title
+                var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 18);
+                var title = new Paragraph("Claims Report", titleFont)
+                {
+                    Alignment = Element.ALIGN_CENTER,
+                    SpacingAfter = 20f
+                };
+                pdfDoc.Add(title);
+
+                // Add date and time
+                var dateTimeFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
+                var dateTime = new Paragraph($"Generated on: {DateTime.Now:yyyy-MM-dd HH:mm:ss}", dateTimeFont)
+                {
+                    Alignment = Element.ALIGN_RIGHT,
+                    SpacingAfter = 10f
+                };
+                pdfDoc.Add(dateTime);
+
+                // Create a table
+                PdfPTable table = new PdfPTable(7); // Updated to include Status column
+                table.WidthPercentage = 100;
+                table.SetWidths(new float[] { 1, 2, 2, 2, 1, 3, 2 }); // Adjust widths
+
+                // Add table headers
+                var headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                table.AddCell(new PdfPCell(new Phrase("ID", headerFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                table.AddCell(new PdfPCell(new Phrase("Start Date", headerFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                table.AddCell(new PdfPCell(new Phrase("End Date", headerFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                table.AddCell(new PdfPCell(new Phrase("Hours Worked", headerFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                table.AddCell(new PdfPCell(new Phrase("Hourly Rate", headerFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                table.AddCell(new PdfPCell(new Phrase("Notes", headerFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+                table.AddCell(new PdfPCell(new Phrase("Status", headerFont)) { HorizontalAlignment = Element.ALIGN_CENTER });
+
+                // Add rows to the table
+                var cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                foreach (var claim in allClaims)
+                {
+                    table.AddCell(new PdfPCell(new Phrase(claim.Id.ToString(), cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(claim.StartDate.ToShortDateString(), cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(claim.EndDate.ToShortDateString(), cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(claim.HoursWorked.ToString(), cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(claim.HourlyRate.ToString("C"), cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(claim.Notes, cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(claim.Status, cellFont)));
+                }
+
+                // Add the table to the document
+                pdfDoc.Add(table);
+
+                // Add total for approved claims
+                var totalFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                var totalParagraph = new Paragraph($"Total for Approved Claims: {totalApproved:C}", totalFont)
+                {
+                    Alignment = Element.ALIGN_RIGHT,
+                    SpacingBefore = 20f
+                };
+                pdfDoc.Add(totalParagraph);
+
+                // Close the document
+                pdfDoc.Close();
+
+                // Return the generated PDF as a file
+                return File(stream.ToArray(), "application/pdf", "ClaimsReport.pdf");
+            }
+        }
+
 
         public IActionResult ViewApprovedClaims()
         {

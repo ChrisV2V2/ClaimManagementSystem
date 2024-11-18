@@ -106,6 +106,10 @@
         <strong>Total Approved Claims Payout:</strong>
         <span>@ViewBag.TotalPayout.ToString("C")</span>
     </div>
+
+    <div>
+        <a asp-action="ExportClaimsToPDF" class="btn btn-primary">Export to PDF</a>
+    </div>
 }
 else
 {
