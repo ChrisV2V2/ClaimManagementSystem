@@ -14,6 +14,7 @@
     <_ContentIncludedByDefault Remove="Views\Home\HRMenu.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\PendingClaims.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Home\ViewAllClaims.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Home\ViewApprovedClaims.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +35,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Home\ViewAllClaims.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\ViewApprovedClaims.cshtml" />
   </ItemGroup>
 
 </Project>

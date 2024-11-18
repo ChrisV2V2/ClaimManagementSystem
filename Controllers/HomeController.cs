@@ -151,6 +151,47 @@ namespace LecturerHourlyClaimApp.Controllers
 
         }
 
+        public IActionResult ViewApprovedClaims()
+        {
+            // Retrieve the user ID of the logged-in user
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            int userId = userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
+
+            // Log the user ID
+            Console.WriteLine($"User ID: {userId}"); // Log the user ID
+
+            // Get all claims in the system
+            var approvedClaims = claims.Where(c => c.Status == "Approved")
+                .Select(c => new TrackClaimViewModel
+                {
+                    Id = c.Id,
+                    PersonId = c.PersonId,
+                    StartDate = c.StartDate,
+                    EndDate = c.EndDate,
+                    HoursWorked = c.HoursWorked,
+                    HourlyRate = c.HourlyRate,
+                    Notes = c.Notes,
+                    Status = c.Status,
+                    SupportingDocumentPath = c.SupportingDocumentPath,
+                    AdminComment = c.AdminComment
+                }).ToList();
+
+            var totalPayout = approvedClaims
+                .Where(c => c.Status == "Approved") // Filter to only approved claims
+                .Sum(c => c.HoursWorked * c.HourlyRate); // Calculate the sum for approved claims
+
+            // Log the number of claims found and the total payout
+            Console.WriteLine($"Total Claims Found: {approvedClaims.Count}");
+            Console.WriteLine($"Total Approved Claims Payout: {totalPayout}");
+
+            // Pass the total payout to the view
+            ViewBag.TotalPayout = totalPayout;
+
+            // Return the view with all claims
+            return View(approvedClaims);
+
+        }
+
         public IActionResult PendingClaims()
         {
             var pendingClaims = claims.Where(c => c.Status == "Pending").ToList();//Will only retrieve claims with the pending status
