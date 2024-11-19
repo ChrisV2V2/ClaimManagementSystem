@@ -112,6 +112,44 @@ namespace LecturerHourlyClaimApp.Controllers
             return View();
         }
 
+        public IActionResult ManageLecturer()
+        {             
+            return View(persons);
+        }
+
+        [HttpGet]
+        public IActionResult GetPerson(int id)
+        {
+            Console.WriteLine($"GetPerson called with ID: {id}");
+            var person = persons.FirstOrDefault(p => p.Id == id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            return Json(person);
+        }
+
+        [HttpPost]
+        public IActionResult UpdatePerson([FromBody] Person updatedPerson)
+        {
+            var person = persons.FirstOrDefault(p => p.Id == updatedPerson.Id);
+            if (person == null)
+            {
+                return NotFound("Person not found.");
+            }
+
+            person.FirstName = updatedPerson.FirstName;
+            person.LastName = updatedPerson.LastName;
+            person.HourlyRate = updatedPerson.HourlyRate;
+
+            return Ok("Lecturer details updated successfully.");
+        }
+
+
+
+
+
+
         public IActionResult ViewAllClaims()
         {
             // Retrieve the user ID of the logged-in user

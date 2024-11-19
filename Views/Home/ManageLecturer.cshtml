@@ -1,0 +1,86 @@
+﻿@model IEnumerable<LecturerHourlyClaimApp.Models.Person>
+
+<h2>Manage Lecturers</h2>
+
+<div id="person-list">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Hourly Rate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in Model)
+            {
+                <tr data-id="@person.Id">
+                    <td>@person.Id</td>
+                    <td contenteditable="true" class="editable" data-field="FirstName">@person.FirstName</td>
+                    <td contenteditable="true" class="editable" data-field="LastName">@person.LastName</td>
+                    <td contenteditable="true" class="editable" data-field="HourlyRate">@person.HourlyRate.ToString("F2")</td>
+                    <td>
+                        <button class="btn btn-success save-btn" style="display:none;">Save</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll("tr[data-id]");
+
+        rows.forEach(row => {
+            const saveButton = row.querySelector(".save-btn");
+            const editableCells = row.querySelectorAll(".editable");
+
+            // Show Save button when a cell is edited
+            editableCells.forEach(cell => {
+                cell.addEventListener("input", () => {
+                    saveButton.style.display = "inline-block";
+                });
+            });
+
+            // Handle Save button click
+            saveButton.addEventListener("click", () => {
+                const personId = row.dataset.id;
+                const updatedData = {};
+
+                editableCells.forEach(cell => {
+                    const fieldName = cell.dataset.field;
+                    const value = cell.textContent.trim();
+                    updatedData[fieldName] =
+                        fieldName === "HourlyRate" ? parseFloat(value) : value;
+                });
+
+                // Add ID to the updated data
+                updatedData.Id = parseInt(personId);
+
+                // Send updated data to the server
+                fetch(`/Home/UpdatePerson`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(updatedData)
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert("Lecturer details updated successfully!");
+                            saveButton.style.display = "none"; // Hide Save button
+                        } else {
+                            return response.text().then(error => {
+                                throw new Error(error);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert(`Failed to update lecturer details: ${error.message}`);
+                    });
+            });
+        });
+    });
+</script>
