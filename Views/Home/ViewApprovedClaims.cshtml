@@ -51,7 +51,7 @@
     }
 </style>
 
-<h2>All Claims</h2>
+<h2>All Approved Claims</h2>
 
 @if (Model.Any())
 {
@@ -105,6 +105,10 @@
     <div style="margin-top: 20px;">
         <strong>Total Approved Claims Payout:</strong>
         <span>@ViewBag.TotalPayout.ToString("C")</span>
+    </div>
+
+    <div>
+        <a asp-action="ExportApprovedClaimsToPDF" class="btn btn-primary">Export to PDF</a>
     </div>
 }
 else
