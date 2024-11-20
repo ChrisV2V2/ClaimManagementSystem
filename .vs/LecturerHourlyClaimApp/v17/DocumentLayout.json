@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\home\\viewapprovedclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:views\\home\\viewapprovedclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\home\\viewapprovedclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|solutionrelative:views\\home\\viewapprovedclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5E6984D4-C347-4A2F-AED4-179B192416C1}|LecturerHourlyClaimApp.csproj|c:\\users\\chris\\source\\repos\\lecturerhourlyclaimapp\\views\\home\\viewallclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -112,24 +112,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 25,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 4,
@@ -145,13 +129,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ViewApprovedClaims.cshtml",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\Home\\ViewApprovedClaims.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\ViewApprovedClaims.cshtml",
               "ToolTip": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Views\\Home\\ViewApprovedClaims.cshtml",
               "RelativeToolTip": "Views\\Home\\ViewApprovedClaims.cshtml",
-              "ViewState": "AQIAAF0AAAAAAAAAAAAAAGkAAAA2AAAA",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAAGkAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-18T11:03:13.455Z",
               "EditorCaption": ""
@@ -444,13 +428,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\chris\\source\\repos\\LecturerHourlyClaimApp\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AQIAAH8BAAAAAAAAAAAUwIgBAABKAAAA",
+              "ViewState": "AQIAALkAAAAAAAAAAAAuwCgBAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-08T17:01:22.12Z",
               "EditorCaption": ""

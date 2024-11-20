@@ -288,7 +288,7 @@ namespace LecturerHourlyClaimApp.Controllers
         public IActionResult ExportApprovedClaimsToPDF()
         {
             // Generate claims data
-            var allClaims = claims
+            var allClaims = claims.Where(c => c.Status == "Approved")
                 .Select(c => new TrackClaimViewModel
                 {
                     Id = c.Id,
